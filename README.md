@@ -184,13 +184,13 @@ npm install
 ### Errore: "Port 3000 already in use"
 ```bash
 # Termina processo e riprova
-npm run dev -- --port 3001
+npm run dev --port 3001
 ```
 
 ### Errore TypeScript
 ```bash
 # Resetta cache TypeScript
-npm run build -- --force
+npm run build --force
 ```
 
 ### VS Code non riconosce TypeScript
@@ -222,8 +222,6 @@ npm run build -- --force
 
 ### Supporto:
 - Alza la mano per domande
-- Usa la chat per link e risorse
-- Pair programming incoraggiato
 
 ### Best Practices:
 - Salva spesso (`Ctrl+S`)
@@ -232,7 +230,8 @@ npm run build -- --force
 - Testa ogni nuovo feature
 
 ### Dopo il Corso:
-- Completa gli esercizi bonus
+- Completa in autonomia gli esercizi
+- Utilizza la Demo-App come esempi per prossimi sviluppi
 - Esplora le risorse extra
 - Unisciti alla community React italiana
 - Considera progetti pratici per consolidare
