@@ -16,15 +16,16 @@ import './Counter.css'
 function Counter({ initialValue = 0, minValue = 0, maxValue }) {
   // TODO 1: Definire lo state per il valore del counter
   // Suggerimento: usa useState() con initialValue
+  const [count, setCount] = useState(initialValue);
   
   // TODO 2: Definire lo state per lo step (incremento/decremento personalizzato)
   // Suggerimento: inizializza con 1
-  const [step, setStep] = useState(/* COMPLETARE */)
+  const [step, setStep] = useState(1)
 
   // TODO 3: Creare una funzione helper per verificare se un numero è pari
   // Suggerimento: usa l'operatore modulo (%)
   const isEven = (num) => {
-    // COMPLETARE: ritorna true se num è pari, false altrimenti
+    return (num % 2) === 0
   }
 
   // TODO 4: Implementare la funzione di incremento
@@ -34,6 +35,12 @@ function Counter({ initialValue = 0, minValue = 0, maxValue }) {
     // - Controlla se supera maxValue (se definito)
     // - Aggiorna lo state solo se la validazione passa
     // - Se supera maxValue, mostra un alert
+    const newValue = count + step;
+    if (maxValue != null && newValue > maxValue) {
+      alert(`Il valore non può superare il massimo di ${maxValue}.`);
+      return;
+    }
+    return setCount(newValue);
   }
 
   // TODO 5: Implementare la funzione di decremento
@@ -43,6 +50,12 @@ function Counter({ initialValue = 0, minValue = 0, maxValue }) {
     // - Controlla se scende sotto minValue
     // - Aggiorna lo state solo se la validazione passa
     // - Se scende sotto minValue, mostra un alert
+    const newValue = count - step;
+    if (newValue < minValue) {
+      alert(`Il valore non può essere inferiore di ${minValue}`);
+      return;
+    }
+    return setCount(newValue);
   }
 
   // TODO 6: Implementare la funzione di reset
@@ -50,6 +63,10 @@ function Counter({ initialValue = 0, minValue = 0, maxValue }) {
     // COMPLETARE:
     // - Chiedi conferma all'utente usando window.confirm()
     // - Se confermato, reimposta count a initialValue
+    const mustContinue = window.confirm('Vuoi resettare il contatore?');
+    if (mustContinue) {
+      setCount(initialValue);
+    }
   }
 
   // TODO 7: Implementare la gestione del cambio step
@@ -59,17 +76,26 @@ function Counter({ initialValue = 0, minValue = 0, maxValue }) {
     // - Convertilo in numero con parseInt()
     // - Valida che sia un numero valido e maggiore di 0
     // - Aggiorna lo state dello step
+    if (event && event.target) {
+      const value = event.target.value;
+      if (!isNaN(value)) {
+        const convertedValue = parseInt(value);
+        if (convertedValue > 0) {
+          setStep(convertedValue);
+        }
+      }
+    }
   }
 
   return (
     <div className="counter-container">
       {/* Display principale del counter */}
       {/* TODO: aggiungi classe 'even' se è pari, 'odd' se è dispari */}
-      <div className="counter-display">
+      <div className={`counter-display ${isEven(count) ? 'even' : 'odd'}`}>
         <span className="counter-value">{count}</span>
         <span className="counter-label">
           {/* TODO: mostra "PARI" se il numero è pari, "DISPARI" altrimenti */}
-          NUMERO
+          NUMERO {isEven(count) ? 'PARI': 'DISPARI'}
         </span>
       </div>
 
@@ -113,7 +139,9 @@ function Counter({ initialValue = 0, minValue = 0, maxValue }) {
         - onClick deve chiamare handleReset
         - Testo del bottone: "🔄 Reset"
       */}
-
+      <button className='btn btn-reset' onClick={() => handleReset()}>
+        🔄 Reset
+      </button>
       {/* Informazioni sui limiti */}
       <div className="counter-info">
         <span>Min: {minValue}</span>
