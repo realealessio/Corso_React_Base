@@ -124,12 +124,13 @@ style: |
 ### **9:00-16:00 (7 ore totali)**
 
 - 🎣 **Hook avanzati** - teoria completa (useState, useEffect, useReducer, useRef, custom hooks) (75 min)
+- ☕ **Pausa** (15 min)
 - 🎯 **Demo dal vivo:** Custom hook useLocalStorage (15 min)
 - 🌐 **Context API** e gestione stato globale (45 min)
 - 🏪 **Redux Toolkit** - panoramica e confronto (45 min)
+- 🚀 **Performance, best practices e ecosistema** (30 min)
 - 🍔 **Pausa pranzo** (60 min)
 - 📘 **TypeScript con React** - teoria e pratica (75 min)
-- 🚀 **Performance, best practices e ecosistema** (30 min)
 - 🎯 **Demo dal vivo:** Task Manager TypeScript completo (30 min)
 - 🎯 **Q&A e troubleshooting finale** (15 min)
 
@@ -168,7 +169,7 @@ style: |
 
 ---
 
-## 🎣 Hook Avanzati - Panoramica (75 min)
+## 🎣 Hook Avanzati - Panoramica
 
 ### **Gli Hook principali di React:**
 
@@ -230,6 +231,8 @@ function FormUtente() {
 
 ### **Gestire array nello state:**
 
+<div class="small-code">
+
 ```jsx
 function ListaTasks() {
   const [tasks, setTasks] = useState([]);
@@ -255,6 +258,7 @@ function ListaTasks() {
   };
 }
 ```
+</div>
 
 ---
 
@@ -279,7 +283,7 @@ useReducer è preferibile quando hai logica di stato complessa con transizioni m
 
 ### **Struttura del reducer:**
 
-<div class="small-code">
+<div class="tiny-code">
 
 ```jsx
 // 1. Definisci lo stato iniziale
@@ -318,6 +322,8 @@ function dataReducer(state, action) {
 
 ### **Nel componente:**
 
+<div class="small-code">
+
 ```jsx
 function UserProfile({ userId }) {
   const [state, dispatch] = useReducer(dataReducer, initialState);
@@ -342,6 +348,7 @@ function UserProfile({ userId }) {
   return <div>{state.data.name}</div>;
 }
 ```
+</div>
 
 ---
 
@@ -388,6 +395,8 @@ function TodoApp() {
 
 ### **Accesso diretto agli elementi:**
 
+<div class="tiny-code">
+
 ```jsx
 function FocusInput() {
   const inputRef = useRef(null);
@@ -413,6 +422,7 @@ function FocusInput() {
   );
 }
 ```
+</div>
 
 ---
 
@@ -420,7 +430,7 @@ function FocusInput() {
 
 ### **Mantieni valori senza re-render:**
 
-<div class="small-code">
+<div class="ultra-compact">
 
 ```jsx
 function Timer() {
@@ -435,7 +445,6 @@ function Timer() {
 
   const startTimer = () => {
     if (intervalRef.current) return; // Già in esecuzione
-    
     intervalRef.current = setInterval(() => {
       setCount(c => c + 1);
     }, 1000);
@@ -485,7 +494,7 @@ I Custom Hooks permettono di estrarre e riutilizzare logica con stato tra più c
 
 ## 🔧 Custom Hook: useLocalStorage
 
-<div class="ultra-tiny-code">
+<div class="ultra-compact">
 
 ```jsx
 function useLocalStorage(key, initialValue) {
@@ -531,6 +540,8 @@ function useLocalStorage(key, initialValue) {
 
 ### **Come si usa:**
 
+<div class="tiny-code">
+
 ```jsx
 function App() {
   const [nome, setNome] = useLocalStorage('nome', '');
@@ -557,12 +568,13 @@ function App() {
   );
 }
 ```
+</div>
 
 ---
 
 ## 🔧 Custom Hook: useFetch
 
-<div class="ultra-tiny-code">
+<div class="ultra-compact">
 
 ```jsx
 function useFetch(url, options = {}) {
@@ -572,23 +584,18 @@ function useFetch(url, options = {}) {
 
   useEffect(() => {
     if (!url) return;
-
     const controller = new AbortController();
-    
     const fetchData = async () => {
       setLoading(true);
       setError(null);
-      
       try {
         const response = await fetch(url, {
           ...options,
           signal: controller.signal
         });
-        
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
         const result = await response.json();
         setData(result);
       } catch (err) {
@@ -599,9 +606,7 @@ function useFetch(url, options = {}) {
         setLoading(false);
       }
     };
-
     fetchData();
-    
     return () => controller.abort();
   }, [url]);
 
@@ -636,7 +641,21 @@ function UserProfile({ userId }) {
 
 ---
 
-## 🎯 Demo dal Vivo: Custom Hook useLocalStorage (15 min)
+## ☕ Pausa (15 min)
+
+<div class="center">
+
+### **Pausa caffè!**
+
+🔄 **Riprendiamo tra 15 minuti**
+
+**Prossimo argomento:** Context API e Gestione Stato Globale
+
+</div>
+
+---
+
+## 🎯 Demo dal Vivo: Custom Hook useLocalStorage
 
 ### **Costruiamo insieme:**
 
@@ -655,7 +674,7 @@ function UserProfile({ userId }) {
 
 ---
 
-## 🌐 Context API (45 min)
+## 🌐 Context API
 
 ### **Il problema: Props Drilling**
 
@@ -784,7 +803,7 @@ function UserMenu() {
 
 ### **Per stato complesso:**
 
-<div class="ultra-tiny-code">
+<div class="ultra-compact">
 
 ```jsx
 // context/TaskContext.jsx
@@ -828,7 +847,7 @@ export const useTasks = () => useContext(TaskContext);
 
 ---
 
-## 🏪 Redux Toolkit (45 min)
+## 🏪 Redux Toolkit
 
 ### **Cos'è Redux?**
 
@@ -962,7 +981,7 @@ function App() {
 
 ## 🏪 Redux: Utilizzo nei Componenti
 
-<div class="small-code">
+<div class="ultra-compact">
 
 ```jsx
 // components/TaskList.jsx
@@ -973,22 +992,18 @@ function TaskList() {
   // Leggi dallo state
   const tasks = useSelector(state => state.tasks);
   const dispatch = useDispatch();
-
   const handleAddTask = (text) => {
     dispatch(addTask({ text }));
   };
-
   const handleToggle = (id) => {
     dispatch(toggleTask(id));
   };
-
   const handleDelete = (id) => {
     dispatch(deleteTask(id));
   };
-
   return (
     <div>
-      <button onClick={() => handleAddTask('Nuova task')}>
+      <button onClick={() => handleAddTask('Nuovo task')}>
         Aggiungi
       </button>
       {tasks.map(task => (
@@ -1049,7 +1064,7 @@ function TaskList() {
 
 ## 🍔 Pausa Pranzo (60 min)
 
-<div class="center">
+<div>
 
 ### **Pausa meritata! 🍕**
 
@@ -1064,13 +1079,12 @@ function TaskList() {
 - 🚀 Performance e best practices
 - 🎯 Demo finale Task Manager TypeScript
 
-**Ci vediamo alle [orario]!**
 
 </div>
 
 ---
 
-## 📘 TypeScript con React (75 min)
+## 📘 TypeScript con React
 
 ### **Perché TypeScript?**
 
@@ -1109,7 +1123,7 @@ npm install --save-dev typescript @types/react @types/react-dom
 
 ## 📘 Props Tipizzate
 
-<div class="small-code">
+<div class="ultra-compact">
 
 ```tsx
 // Definizione interfaccia
@@ -1132,7 +1146,7 @@ function ProfiloUtente({
   hobbies,
   avatar,
   onEdit 
-}: ProfiloUtenteProps) {
+}: ProfiloUtenteProps): React.ReactNode {
   return (
     <div className="profilo">
       {avatar && <img src={avatar} alt={nome} />}
@@ -1155,7 +1169,7 @@ function ProfiloUtente({
 
 ## 📘 State Tipizzato
 
-<div class="small-code">
+<div class="tiny-code">
 
 ```tsx
 // Type inference automatico
@@ -1189,7 +1203,7 @@ const [formData, setFormData] = useState<FormData>({
 
 ## 📘 Eventi Tipizzati
 
-<div class="small-code">
+<div class="ultra-compact">
 
 ```tsx
 function FormComponent() {
@@ -1229,6 +1243,8 @@ function FormComponent() {
 
 ## 📘 useRef Tipizzato
 
+<div class="tiny-code">
+
 ```tsx
 function VideoPlayer() {
   // Ref per elemento video
@@ -1259,6 +1275,7 @@ function VideoPlayer() {
   );
 }
 ```
+</div>
 
 ---
 
@@ -1311,7 +1328,7 @@ export const useUser = (): UserContextType => {
 
 ## 📘 Tipi Utili
 
-<div class="small-code">
+<div class="ultra-compact">
 
 ```tsx
 // Union types
@@ -1392,7 +1409,7 @@ const [count, setCount] = useLocalStorage<number>('count', 0);
 
 ---
 
-## 🚀 Performance e Best Practices (30 min)
+## 🚀 Performance e Best Practices
 
 ### **React.memo - Evita re-render inutili:**
 
@@ -1423,6 +1440,8 @@ const ExpensiveComponent = React.memo(({ data, filter }: ExpensiveProps) => {
 
 ### **Memorizza funzioni:**
 
+<div class="tiny-code">
+
 ```tsx
 function Parent() {
   const [count, setCount] = useState(0);
@@ -1448,6 +1467,7 @@ function Parent() {
   );
 }
 ```
+</div>
 
 ---
 
@@ -1455,7 +1475,7 @@ function Parent() {
 
 ### **Memorizza calcoli costosi:**
 
-<div class="small-code">
+<div class="tiny-code">
 
 ```tsx
 interface Item {
@@ -1470,7 +1490,6 @@ function ProductList({ items, filter }: { items: Item[]; filter: string }) {
   const filteredItems = items
     .filter(item => item.category === filter)
     .sort((a, b) => b.price - a.price);
-
   // ✅ Con useMemo: ricalcola solo se cambiano items o filter
   const filteredItemsMemo = useMemo(() => {
     console.log('Calcolo costoso...');
@@ -1478,7 +1497,6 @@ function ProductList({ items, filter }: { items: Item[]; filter: string }) {
       .filter(item => item.category === filter)
       .sort((a, b) => b.price - a.price);
   }, [items, filter]);
-
   return (
     <ul>
       {filteredItemsMemo.map(item => (
@@ -1536,7 +1554,7 @@ src/
 
 ---
 
-## 🎯 Demo dal Vivo: Task Manager TypeScript (30 min)
+## 🎯 Demo dal Vivo: Task Manager TypeScript
 
 ### **Applicazione completa con:**
 
@@ -1574,7 +1592,7 @@ src/
 
 ---
 
-## 🎯 Q&A e Troubleshooting (15 min)
+## 🎯 Q&A e Troubleshooting
 
 <div class="center">
 
