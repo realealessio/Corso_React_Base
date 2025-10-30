@@ -16,7 +16,6 @@ import './Counter.css'
 function Counter({ initialValue = 0, minValue = 0, maxValue }) {
   // TODO 1: Definire lo state per il valore del counter
   // Suggerimento: usa useState() con initialValue
-  const [count, setCount] = useState(initialValue)
   
   // TODO 2: Definire lo state per lo step (incremento/decremento personalizzato)
   // Suggerimento: inizializza con 1
