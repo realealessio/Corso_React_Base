@@ -84,30 +84,6 @@ Corso_React_Base/
 
 ---
 
-## 📅 Agenda del Corso (14 ore totali)
-
-### **Giorno 1 (9:00-16:00) - 7 ore**
-- ⚛️ Introduzione a React e setup ambiente (60 min)
-- 🧩 Componenti, JSX e Props (75 min)
-- 🎯 **Esercizio 1:** Demo Contatore interattivo (15 min)
-- 🍔 Pausa pranzo (60 min)
-- 🔄 State, eventi e rendering condizionale (60 min)
-- 🎯 **Esercizio 2:** Todo List completa (30 min)
-- 💬 Q&A (15 min)
-
-### **Giorno 2 (9:00-16:00) - 7 ore**
-- 🎣 Hook Avanzati - Panoramica Completa (useState, useEffect, useReducer, useRef, custom hooks) (75 min)
-- 🎯 **Esercizio 3:** Custom Hook useLocalStorage (15 min)
-- 🌐 Context API e gestione stato globale (45 min)
-- 🏪 Redux Toolkit - panoramica e confronto (45 min)
-- 🍔 Pausa pranzo (60 min)
-- 📘 TypeScript con React - teoria e pratica (75 min)
-- 🚀 Performance, best practices e ecosistema (30 min)
-- 🎯 **Esercizio 4:** Task Manager TypeScript Completo (30 min)
-- 💬 Q&A e troubleshooting finale (15 min)
-
----
-
 ## 🎯 Durante il Corso
 
 ### Esercizi Pratici:
