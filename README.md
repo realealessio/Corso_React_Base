@@ -61,25 +61,26 @@ Se vedi la Task Manager App funzionante, tutto è pronto! 🎉
 
 ```
 Corso_React_Base/
-├── ESERCIZI.md                 # Guida completa agli esercizi pratici
-├── README.md                   # Questo file
-├── slides-giorno1.md           # Slide Giorno 1 - Fondamenti (Marp format)
-├── slides-giorno2.md           # Slide Giorno 2 - Hook Avanzati e TypeScript (Marp format)
-├── demo-app/                   # App completa dimostrativa
+├── ESERCIZI.md                                       # Guida completa agli esercizi pratici
+├── README.md                                         # Questo file
+|-- slides-class-components-vs-function-components.md # Slide Extra               
+├── slides-giorno1.md                                 # Slide Giorno 1 - Fondamenti (Marp format)
+├── slides-giorno2.md                                 # Slide Giorno 2 - Hook Avanzati e TypeScript (Marp format)
+├── demo-app/                                         # App completa dimostrativa
 │   ├── src/
-│   │   ├── components/         # Componenti React
-│   │   ├── contexts/          # Context API examples
-│   │   ├── hooks/             # Custom hooks
-│   │   ├── types/             # TypeScript types
-│   │   └── App.tsx            # App principale
+│   │   ├── components/                               # Componenti React
+│   │   ├── contexts/                                 # Context API examples
+│   │   ├── hooks/                                    # Custom hooks
+│   │   ├── types/                                    # TypeScript types
+│   │   └── App.tsx                                   # App principale
 │   ├── package.json
 │   └── vite.config.ts
-└── esercizi/                   # Esercizi pratici del corso
-    ├── README.md               # Guida agli esercizi
-    ├── esercizio1-counter/     # Counter interattivo (Giorno 1)
-    ├── esercizio2-todolist/    # Todo List completa (Giorno 1)
-    ├── esercizio3-custom-hook/ # Custom Hook useLocalStorage (Giorno 2)
-    └── esercizio4-task-manager/# Task Manager finale (Giorno 2)
+└── esercizi/                                         # Esercizi pratici del corso
+    ├── README.md                                     # Guida agli esercizi
+    ├── esercizio1-counter/                           # Counter interattivo (Giorno 1)
+    ├── esercizio2-todolist/                          # Todo List completa (Giorno 1)
+    ├── esercizio3-custom-hook/                       # Custom Hook useLocalStorage (Giorno 2)
+    └── esercizio4-task-manager/                      # Task Manager finale (Giorno 2)
 ```
 
 ---
@@ -122,8 +123,6 @@ marp slides-giorno1.md --pptx -o slides-giorno1.pptx
 # Giorno 2
 marp slides-giorno2.md --pptx -o slides-giorno2.pptx
 ```
-
-### Comandi Esercizi:
 
 ### Comandi Esercizi:
 ```bash
