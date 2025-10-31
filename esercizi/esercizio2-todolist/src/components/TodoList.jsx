@@ -21,10 +21,10 @@ function TodoList() {
   
   // TODO 2: Definire lo state per il filtro corrente
   // Suggerimento: può essere 'all', 'active', o 'completed'
-  const [filter, setFilter] = useState(/* COMPLETARE */)
+  const [filter, setFilter] = useState('all')
   
   // TODO 3: Definire lo state per l'input del nuovo todo
-  const [newTodoText, setNewTodoText] = useState(/* COMPLETARE */)
+  const [newTodoText, setNewTodoText] = useState('')
 
   // TODO 4: useEffect per caricare i todos dal localStorage all'avvio
   // Suggerimento: usa localStorage.getItem('todos') e JSON.parse()
@@ -34,6 +34,17 @@ function TodoList() {
     // - Fai il parsing JSON
     // - Se esistono, aggiorna lo state
     // - Gestisci eventuali errori con try/catch
+    if (window) {
+      const todo = window.localStorage.getItem('todos');
+      if (todo) {
+        try {
+          const parsedTodos = JSON.parse(todo);
+          setTodos(parsedTodos);
+        } catch (error) {
+          console.error("Errore nel parsing dei todos dal localStorage:", error);
+        }
+      }
+    }
   }, []) // Array vuoto = esegue solo al mount
 
   // TODO 5: useEffect per salvare i todos nel localStorage quando cambiano
@@ -41,7 +52,10 @@ function TodoList() {
     // COMPLETARE:
     // - Salva todos nel localStorage come stringa JSON
     // - Usa localStorage.setItem('todos', JSON.stringify(todos))
-  }, [/* COMPLETARE: quale dipendenza? */])
+    if (window) {
+      window.localStorage.setItem('todos', JSON.stringify(todos));
+    }
+  }, [todos])
 
   // TODO 6: Funzione per aggiungere un nuovo todo
   const handleAddTodo = (e) => {
@@ -55,6 +69,16 @@ function TodoList() {
     //   * completed: false
     // - Aggiungi il nuovo todo all'array (usando spread operator)
     // - Resetta newTodoText a stringa vuota
+    const text = newTodoText.trim();
+    if (text) {
+      const newTodo = {
+        id: Date.now(),
+        text: text,
+        completed: false
+      };
+      setTodos([...todos, newTodo]);
+      setNewTodoText('');
+    }
   }
 
   // TODO 7: Funzione per togglere il completamento di un todo
@@ -67,6 +91,9 @@ function TodoList() {
     // Esempio: setTodos(todos.map(todo => 
     //   todo.id === id ? { ...todo, completed: !todo.completed } : todo
     // ))
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
   }
 
   // TODO 8: Funzione per eliminare un todo
@@ -74,6 +101,7 @@ function TodoList() {
     // COMPLETARE:
     // - Usa filter() per creare un nuovo array senza il todo da eliminare
     // - Aggiorna lo state
+    setTodos(todos.filter(todo => todo.id !== id));
   }
 
   // TODO 9: Funzione per filtrare i todos in base al filtro corrente
@@ -86,16 +114,18 @@ function TodoList() {
     
     switch (filter) {
       case 'active':
-        // COMPLETARE: filtra solo i todos attivi
+      // COMPLETARE: filtra solo i todos attivi
+        return todos.filter(todo => !todo.completed);
       case 'completed':
-        // COMPLETARE: filtra solo i todos completati
+      // COMPLETARE: filtra solo i todos completati
+        return todos.filter(todo => todo.completed);
       default:
         return todos
     }
   }
 
   // TODO 10: Calcolare il numero di task rimanenti (non completati)
-  const remainingCount = 0 // COMPLETARE: usa filter().length
+  const remainingCount = todos.filter(todo => !todo.completed).length; // COMPLETARE: usa filter().length
 
   const filteredTodos = getFilteredTodos()
 
