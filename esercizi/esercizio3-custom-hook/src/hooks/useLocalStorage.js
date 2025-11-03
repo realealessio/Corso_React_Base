@@ -22,13 +22,17 @@ export function useLocalStorage(key, initialValue) {
     // 3. Se esiste, fai il parsing JSON
     // 4. Se non esiste o c'è un errore, usa initialValue
     // 5. Gestisci gli errori con try/catch
-    
+    if (typeof window === 'undefined') {
+      return initialValue;
+    }
     try {
       // TODO: Implementa la logica qui
       
       // Suggerimento:
       // const item = window.localStorage.getItem(key)
       // return item ? JSON.parse(item) : initialValue
+      const item = window.localStorage.getItem(key)
+      return item ? JSON.parse(item) : initialValue
       
     } catch (error) {
       console.warn(`Errore nel leggere localStorage key "${key}":`, error)
@@ -38,7 +42,7 @@ export function useLocalStorage(key, initialValue) {
 
   // TODO 2: Creare lo state usando la funzione readValue
   // Suggerimento: useState può accettare una funzione per lazy initialization
-  const [storedValue, setStoredValue] = useState(/* COMPLETARE */)
+  const [storedValue, setStoredValue] = useState(readValue)
 
   // TODO 3: Creare una funzione setValue che aggiorna sia lo state che localStorage
   const setValue = (value) => {
@@ -50,11 +54,14 @@ export function useLocalStorage(key, initialValue) {
       
       // Suggerimento per gestire funzioni:
       // const valueToStore = value instanceof Function ? value(storedValue) : value
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
       
       // TODO: Aggiorna storedValue
+      setStoredValue(valueToStore);
       
       // TODO: Salva in localStorage
       // window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
       
     } catch (error) {
       console.warn(`Errore nel salvare localStorage key "${key}":`, error)
@@ -72,13 +79,20 @@ export function useLocalStorage(key, initialValue) {
     //     setStoredValue(JSON.parse(e.newValue))
     //   }
     // }
+    const handleStorageChange = (e) => {
+      if (e.key === key && e.newValue !== null) {
+        setStoredValue(JSON.parse(e.newValue))
+      }
     
-    // window.addEventListener('storage', handleStorageChange)
-    // return () => window.removeEventListener('storage', handleStorageChange)
+      // window.addEventListener('storage', handleStorageChange)
+      // return () => window.removeEventListener('storage', handleStorageChange)
+      window.addEventListener('storage', handleStorageChange);
+      return () => window.removeEventListener('storage', handleStorageChange);
+    }
   }, [key])
 
   // TODO 5: Ritorna l'array [valore, setter] come useState
-  return [/* COMPLETARE */]
+  return [storedValue, setValue]
 }
 
 /* 
