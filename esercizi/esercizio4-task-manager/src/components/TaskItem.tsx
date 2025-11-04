@@ -8,7 +8,7 @@ interface TaskItemProps {
 
 // TODO 11: Avvolgere il componente con React.memo per ottimizzare le performance
 // Il componente si re-renderizza solo quando le props cambiano
-export const TaskItem = ({ task }: TaskItemProps) => {
+export const TaskItem = memo(({ task }: TaskItemProps) => {
   const { toggleTask, deleteTask } = useTasks();
 
   return (
@@ -20,7 +20,7 @@ export const TaskItem = ({ task }: TaskItemProps) => {
           onChange={() => toggleTask(task.id)}
           aria-label={`Completa task: ${task.title}`}
         />
-        
+
         <div className="task-details">
           <h3>{task.title}</h3>
           {task.description && <p>{task.description}</p>}
@@ -46,6 +46,6 @@ export const TaskItem = ({ task }: TaskItemProps) => {
       </div>
     </div>
   );
-};
+});
 
 TaskItem.displayName = 'TaskItem';

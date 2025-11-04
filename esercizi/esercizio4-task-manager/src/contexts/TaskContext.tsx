@@ -9,25 +9,124 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 // - 'DELETE_TASK': filtrare le task rimuovendo quella con l'id specificato
 // - 'TOGGLE_TASK': invertire completed e aggiornare status (DONE se completed, TODO altrimenti)
 function taskReducer(state: Task[], action: TaskAction): Task[] {
-  // Completare qui
-  return state;
+  let newTasks: Task[] = [...state];
+  switch (action.type) {
+    case 'ADD_TASK': {
+      const newTask: Task = {
+        id: crypto.randomUUID(),
+        status: TaskStatus.TODO,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        completed: false,
+        title: action.payload.title || '',
+        description: action.payload.description || ''
+      };
+      newTasks.push(newTask);
+      break;
+    }
+    case 'UPDATE_TASK': {
+      const taskEditable: Task | undefined = newTasks.find(task => task.id === action.payload.id);
+      if (taskEditable) {
+        taskEditable.updatedAt = new Date();
+      }
+      break;
+    }
+    case 'DELETE_TASK': {
+      const taskFiltered: Task[] = newTasks.filter(task => task.id !== action.payload.id);
+      newTasks = taskFiltered;
+      break;
+    }
+    case 'TOGGLE_TASK': {
+      const taskToggle: Task | undefined = newTasks.find(task => task.id === action.payload.id);
+      if (taskToggle) {
+        taskToggle.completed = !taskToggle.completed;
+        taskToggle.status = taskToggle.completed ? TaskStatus.DONE : TaskStatus.TODO;
+        taskToggle.updatedAt = new Date();
+      }
+      break;
+    }
+    default: {
+      return state;
+    }
+  }   
+  return newTasks;
 }
 
 // TODO 8: Creare il TaskContext usando createContext
-// const TaskContext = createContext<TaskContextType | undefined>(undefined);
+const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
 // TODO 9: Implementare il TaskProvider
-// export function TaskProvider({ children }: { children: ReactNode }) {
-//   // Usare useLocalStorage per tasks e filter
-//   // Usare useReducer per gestire lo stato
-//   // Calcolare stats con useMemo
-//   // Calcolare filteredTasks con useMemo
-//   // Implementare le funzioni: addTask, updateTask, deleteTask, toggleTask
-//   // Sincronizzare tasks con localStorage usando useEffect
-// }
+export function TaskProvider({ children }: { children: ReactNode }) {
+  // Usare useLocalStorage per tasks e filter
+  // Usare useReducer per gestire lo stato
+  // Calcolare stats con useMemo
+  // Calcolare filteredTasks con useMemo
+  // Implementare le funzioni: addTask, updateTask, deleteTask, toggleTask
+  // Sincronizzare tasks con localStorage usando useEffect
+  const [storedTasks, setStoredTasks] = useLocalStorage<Task[]>('tasks', []);
+  const [storedFilter, setStoredFilter] = useLocalStorage<TaskFilter>('filter', 'all'); 
+  const [tasks, dispatch] = useReducer(taskReducer, storedTasks);
+
+  const stats: TaskStats = useMemo(() => {
+    const total = tasks.length;
+    const completed = tasks.filter(task => task.completed).length;
+    const active = total - completed;
+    return { total, active, completed };
+  }, [tasks]);
+
+  const filteredTasks: Task[] = useMemo(() => {
+    switch (storedFilter) {
+      case 'active':
+        return tasks.filter(task => !task.completed);
+      case 'completed':
+        return tasks.filter(task => task.completed);
+      case 'all':
+      default:
+        return tasks;
+    }
+  }, [tasks, storedFilter]);
+
+  const addTask = (payload: Extract<TaskAction, {type: 'ADD_TASK'}>['payload']) => {
+    dispatch({ type: 'ADD_TASK', payload });
+  }
+  const updateTask = (payload: Extract<TaskAction, { type: 'UPDATE_TASK' }>['payload']) => {
+    dispatch({ type: 'UPDATE_TASK', payload });
+  }
+  const deleteTask = (id: string) => {
+    dispatch({ type: 'DELETE_TASK', payload: { id } });
+  }
+  const toggleTask = (id: string) => {
+    dispatch({ type: 'TOGGLE_TASK', payload: { id } });
+  }
+
+  useEffect(() => {
+    setStoredTasks(tasks);
+  }, [tasks]);
+
+  useEffect(() => {
+    setStoredFilter(storedFilter);
+  }, [storedFilter]);
+
+  const value: TaskContextType = {
+    tasks,
+    filter: storedFilter,
+    stats,
+    addTask,
+    updateTask,
+    deleteTask,
+    toggleTask,
+    setFilter: setStoredFilter,
+    filteredTasks
+  };
+  return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
+}
 
 // TODO 10: Implementare il custom hook useTasks
 // Deve restituire il context e lanciare errore se usato fuori dal provider
-// export function useTasks() {
-//   ...
-// }
+export function useTasks() {
+  const context = useContext(TaskContext);
+  if (!context) {
+    throw new Error('useTasks must be used within a TaskProvider');
+  }
+  return context;
+}
