@@ -169,6 +169,7 @@ body {
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s;
+  color: #555;
 }
 
 .filter-btn:hover {
