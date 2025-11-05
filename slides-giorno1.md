@@ -126,13 +126,10 @@ style: |
 - 🌟 **Introduzione a React** e setup ambiente (30 min)
 - 🧩 **Componenti funzionali e JSX** (40 min)
 - 📤 **Props e destructuring** (30 min)
-- ☕ **Pausa** (10 min)
 - 🔄 **State e useState hook** (40 min)
 - 🎯 **Gestione eventi e form** (30 min)
-- 🍔 **Pausa pranzo** (60 min)
 - 🎯 **Demo dal vivo:** Contatore interattivo (15 min)
 - 🔗 **Hook useEffect** (45 min)
-- ☕ **Pausa** (15 min)
 - 💡 **Rendering condizionale e liste** (45 min)
 - 🎯 **Demo dal vivo:** Todo List completa (45 min)
 
@@ -485,20 +482,6 @@ function Saluto({
 
 ---
 
-## ☕ Pausa (10 min)
-
-<div class="center">
-
-### **Piccola pausa caffè!**
-
-🔄 **Riprendiamo tra 10 minuti**
-
-**Prossimo argomento:** State e useState Hook
-
-</div>
-
----
-
 ## 🔄 State e useState Hook
 
 ### **Introduzione allo State:**
@@ -694,20 +677,6 @@ function FormControllato() {
 
 ---
 
-## 🍔 Pausa Pranzo (60 min)
-
-<div class="center">
-
-### **Ci rivediamo alle 14:00!**
-
-🍕 **Buon appetito!**
-
-📱 **Domande?** Approfittiamo della pausa
-
-</div>
-
----
-
 ## 🎯 Demo dal Vivo: Contatore Interattivo
 
 ### **Costruiamo insieme:**
@@ -858,20 +827,6 @@ function UserList() {
   );
 }
 ```
-
-</div>
-
----
-
-## ☕ Pausa (15 min)
-
-<div class="center">
-
-### **Pausa meritata!**
-
-🔄 **Ci rivediamo tra 15 minuti**
-
-**Prossimo argomento:** Rendering Condizionale e Liste
 
 </div>
 

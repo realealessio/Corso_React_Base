@@ -185,6 +185,7 @@ npm run build --force
 - [React Hooks](https://react.dev/reference/react)
 - [TypeScript Cheat Sheet](https://github.com/typescript-cheatsheets/react)
 - [ES6+ Features](https://github.com/lukehoban/es6features)
+- [Lifecycle React](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 
 ### Tools Online:
 - [CodeSandbox](https://codesandbox.io/) - Playground React
