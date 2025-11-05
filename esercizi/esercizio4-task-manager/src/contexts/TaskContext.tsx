@@ -9,7 +9,6 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 // - 'DELETE_TASK': filtrare le task rimuovendo quella con l'id specificato
 // - 'TOGGLE_TASK': invertire completed e aggiornare status (DONE se completed, TODO altrimenti)
 function taskReducer(state: Task[], action: TaskAction): Task[] {
-  let newTasks: Task[] = [...state];
   switch (action.type) {
     case 'ADD_TASK': {
       const newTask: Task = {
@@ -21,35 +20,37 @@ function taskReducer(state: Task[], action: TaskAction): Task[] {
         title: action.payload.title || '',
         description: action.payload.description || ''
       };
-      newTasks.push(newTask);
-      break;
+      return [...state, newTask]; // ✅ Immutabile
     }
+    
     case 'UPDATE_TASK': {
-      const taskEditable: Task | undefined = newTasks.find(task => task.id === action.payload.id);
-      if (taskEditable) {
-        taskEditable.updatedAt = new Date();
-      }
-      break;
+      return state.map(task =>
+        task.id === action.payload.id
+          ? { ...task, ...action.payload.updates, updatedAt: new Date() }
+          : task
+      ); // ✅ Immutabile
     }
+    
     case 'DELETE_TASK': {
-      const taskFiltered: Task[] = newTasks.filter(task => task.id !== action.payload.id);
-      newTasks = taskFiltered;
-      break;
+      return state.filter(task => task.id !== action.payload.id); // ✅ Immutabile
     }
+    
     case 'TOGGLE_TASK': {
-      const taskToggle: Task | undefined = newTasks.find(task => task.id === action.payload.id);
-      if (taskToggle) {
-        taskToggle.completed = !taskToggle.completed;
-        taskToggle.status = taskToggle.completed ? TaskStatus.DONE : TaskStatus.TODO;
-        taskToggle.updatedAt = new Date();
-      }
-      break;
+      return state.map(task =>
+        task.id === action.payload.id
+          ? {
+              ...task,
+              completed: !task.completed,
+              status: !task.completed ? TaskStatus.DONE : TaskStatus.TODO,
+              updatedAt: new Date()
+            }
+          : task
+      ); // ✅ Immutabile
     }
-    default: {
+    
+    default:
       return state;
-    }
-  }   
-  return newTasks;
+  }
 }
 
 // TODO 8: Creare il TaskContext usando createContext

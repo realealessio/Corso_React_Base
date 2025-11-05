@@ -52,10 +52,10 @@ export interface TaskContextType {
   tasks: Task[];
   filter: TaskFilter;
   stats: TaskStats;
+  filteredTasks: Task[];
   addTask: (payload: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateTask: (payload: Extract<TaskAction, { type: 'UPDATE_TASK' }>['payload']) => void;
   deleteTask: (id: string) => void;
   toggleTask: (id: string) => void;
   setFilter: (filter: TaskFilter) => void;
-  filteredTasks: Task[];
 }
