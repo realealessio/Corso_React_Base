@@ -1,6 +1,8 @@
-﻿*/node_modules
+﻿.vscode/
+*/node_modules
 */dist
 */package-lock.json
 esercizi/*/node_modules
 esercizi/*/dist
 esercizi/*/package-lock.json
+~$slide*

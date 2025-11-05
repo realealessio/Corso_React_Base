@@ -142,7 +142,7 @@ npm install
 ### Problema: Porta 5173 già in uso
 ```bash
 # Soluzione: Usa porta diversa
-npm run dev -- --port 3000
+npm run dev --port 3000
 ```
 
 ### Problema: Modifiche non si vedono

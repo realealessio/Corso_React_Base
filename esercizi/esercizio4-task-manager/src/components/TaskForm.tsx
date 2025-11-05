@@ -15,7 +15,8 @@ export function TaskForm() {
     addTask({
       title: title.trim(),
       description: description.trim(),
-      status: TaskStatus.TODO
+      status: TaskStatus.TODO,
+      completed: false
     });
 
     // Reset form
@@ -25,7 +26,7 @@ export function TaskForm() {
 
   return (
     <form onSubmit={handleSubmit} className="task-form">
-      <h2>➕ Nuova Task</h2>
+      <h2>➕ Nuovo Task</h2>
       
       <div className="form-group">
         <label htmlFor="title">Titolo *</label>
