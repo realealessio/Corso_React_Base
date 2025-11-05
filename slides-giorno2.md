@@ -124,12 +124,10 @@ style: |
 ### **9:00-16:00 (7 ore totali)**
 
 - 🎣 **Hook avanzati** - teoria completa (useState, useEffect, useReducer, useRef, custom hooks) (75 min)
-- ☕ **Pausa** (15 min)
 - 🎯 **Demo dal vivo:** Custom hook useLocalStorage (15 min)
-- 🌐 **Context API** e gestione stato globale (45 min)
+- 🌐  **Context API** e gestione stato globale (45 min)
 - 🏪 **Redux Toolkit** - panoramica e confronto (45 min)
 - 🚀 **Performance, best practices e ecosistema** (30 min)
-- 🍔 **Pausa pranzo** (60 min)
 - 📘 **TypeScript con React** - teoria e pratica (75 min)
 - 🎯 **Demo dal vivo:** Task Manager TypeScript completo (30 min)
 - 🎯 **Q&A e troubleshooting finale** (15 min)
@@ -641,20 +639,6 @@ function UserProfile({ userId }) {
 
 ---
 
-## ☕ Pausa (15 min)
-
-<div class="center">
-
-### **Pausa caffè!**
-
-🔄 **Riprendiamo tra 15 minuti**
-
-**Prossimo argomento:** Context API e Gestione Stato Globale
-
-</div>
-
----
-
 ## 🎯 Demo dal Vivo: Custom Hook useLocalStorage
 
 ### **Costruiamo insieme:**
@@ -1059,28 +1043,6 @@ function TaskList() {
 - ✅ Molte parti aggiornano lo stato frequentemente
 - ✅ Serve time-travel debugging
 - ✅ Team grande, serve prevedibilità
-
----
-
-## 🍔 Pausa Pranzo (60 min)
-
-<div>
-
-### **Pausa meritata! 🍕**
-
-**Cosa abbiamo fatto stamattina:**
-- ✅ Hook avanzati (useState, useEffect, useReducer, useRef)
-- ✅ Custom hooks (useLocalStorage, useFetch)
-- ✅ Context API per stato globale
-- ✅ Redux Toolkit panoramica
-
-**Nel pomeriggio:**
-- 📘 TypeScript con React
-- 🚀 Performance e best practices
-- 🎯 Demo finale Task Manager TypeScript
-
-
-</div>
 
 ---
 
